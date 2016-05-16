@@ -8,7 +8,7 @@ M = ...
    3 100;
    3.5 190];
 
-f= InterpolacionNewton(M);
+f= InterpolacionNewton(M)
 sx= M(:,1:1);
 sy= M(:, 2:2);
 k= 1:.5  :4;

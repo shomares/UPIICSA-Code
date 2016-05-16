@@ -1,12 +1,9 @@
 function[salida]= InterpolacionMinimosCuadrados(tabla, grado)
     syms x;
-   
     eqn= zeros(grado);
     sol= zeros(grado,1);
     tam= size(tabla);
     salida=0;
-    %Primero formamos las ecuaciones
-    %Luego lo demas
     m= grado;
     refGrado=0;
     while m>0
@@ -31,12 +28,10 @@ function[salida]= InterpolacionMinimosCuadrados(tabla, grado)
            sol((grado-m) +1 ,1)= SumatoriaXY(tabla,m-1);
            m=m-1;
     end
-    
     solv= linsolve(eqn,sol);
     m= grado;
     while m>0
         salida= salida+ (solv( grado-m +1 )*  (x^(m-1)));
         m= m-1;
     end
-     
 end
