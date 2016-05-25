@@ -142,6 +142,16 @@ else
               else
                   msgbox('No se puede evaluar a ese grado', 'Error','error');
               end
+          case 'newtonradio'
+                delt= Delta(matriz);
+                if(delt>0)
+                    f= InterpolacionNewton(matriz);
+                else
+                    msgbox('No se puede evaluar con este metodo', 'Error','error');
+                end
+          case 'transformadaradio'
+                msgbox('No impemented', 'Error','error');
+              
       end
       cla(handles.axes2, 'reset');
       set(handles.edit4,'String','');

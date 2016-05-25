@@ -15,11 +15,11 @@ function [ salida ] = IntegracionSimpson38(pol,limS, limI, n)
                 i=i+1;
             end
         end
+         salida= (3 / 8) * h * resultado;
     else
-        %Error
+        salida= 0;
     end
 
-    salida= (3 / 8) * h * resultado;
-
+   
 end
 

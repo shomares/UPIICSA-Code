@@ -11,11 +11,12 @@ function [ salida ] = IntegracionSimpson12(pol,limS, limI, n)
                 resultado= resultado + 2 * matriz(n,2);
             end
         end
+         salida= (1 / 3) * h * resultado;
     else
         %Error
     end
 
-    salida= (1 / 3) * h * resultado;
+   
 
 end
 
