@@ -22,7 +22,7 @@ function varargout = Integracion(varargin)
 
 % Edit the above text to modify the response to help Integracion
 
-% Last Modified by GUIDE v2.5 25-May-2016 12:06:36
+% Last Modified by GUIDE v2.5 26-May-2016 15:48:31
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -83,8 +83,8 @@ a= str2double(get(handles.edit2, 'String'));
 b= str2double(get(handles.edit3, 'String'));
 n= str2double(get(handles.edit5, 'String'));
 intervalo= [0 0];
-intervalo(1)= a;
-intervalo(2)= b;
+intervalo(1)= b;
+intervalo(2)= a;
 
 try
     cla(handles.axes1, 'reset');
@@ -532,3 +532,12 @@ set(handles.edit4, 'String', '');
 % hObject    handle to pushbutton34 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+% --- Executes during object creation, after setting all properties.
+function axes3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to axes3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate axes3
+imshow(imread('5.jpg'));

@@ -96,7 +96,7 @@ function pushbutton4_Callback(hObject, eventdata, handles)
             name= strcat(pathname,filename);
             xlswrite(name,T,'Resultados','A1');
             xlswrite(name,tabular,'Resultados','A2');
-            open(name)
+            %open(name)
         end
         
     end
@@ -119,7 +119,8 @@ if isequal(filename,0)
    msgbox('No ha seleccionado un archivo', 'Error','error');
    set(InterfaceObj,'Enable','on');
 else
-  matriz = xlsread(strcat(pathname,filename));
+    
+  matriz = xlsread(strcat(pathname,filename), 1, '', 'basic');
   tam= size(matriz);
   
   if(tam(2)>1)
