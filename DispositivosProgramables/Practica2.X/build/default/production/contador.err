@@ -1,0 +1,9 @@
+Warning[207] C:\USERS\LABELECTI\MPLABXPROJECTS\PRACTICA2.X\CONTADOR.ASM 99 : Found label after column 1. (ini)
+Warning[207] C:\USERS\LABELECTI\MPLABXPROJECTS\PRACTICA2.X\CONTADOR.ASM 101 : Found label after column 1. (ini2)
+Warning[207] C:\USERS\LABELECTI\MPLABXPROJECTS\PRACTICA2.X\CONTADOR.ASM 114 : Found label after column 1. (inc)
+Warning[207] C:\USERS\LABELECTI\MPLABXPROJECTS\PRACTICA2.X\CONTADOR.ASM 119 : Found label after column 1. (tabla)
+Warning[207] C:\USERS\LABELECTI\MPLABXPROJECTS\PRACTICA2.X\CONTADOR.ASM 138 : Found label after column 1. (retardo_1)
+Warning[202] C:\USERS\LABELECTI\MPLABXPROJECTS\PRACTICA2.X\CONTADOR.ASM 139 : Argument out of range.  Least significant bits used.
+Warning[207] C:\USERS\LABELECTI\MPLABXPROJECTS\PRACTICA2.X\CONTADOR.ASM 141 : Found label after column 1. (ini_1)
+Warning[202] C:\USERS\LABELECTI\MPLABXPROJECTS\PRACTICA2.X\CONTADOR.ASM 142 : Argument out of range.  Least significant bits used.
+Warning[207] C:\USERS\LABELECTI\MPLABXPROJECTS\PRACTICA2.X\CONTADOR.ASM 144 : Found label after column 1. (bucle)
