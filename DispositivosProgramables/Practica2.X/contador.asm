@@ -1,7 +1,6 @@
 
 
- 
- 		LIST P=18F4550 				;directive to define processor
+ LIST P=18F4550 				;directive to define processor
 		#include <P18F4550.INC> 	;processor specific variable definitions
  
     	;CONFIG1L dir 300000h 		20
@@ -28,11 +27,11 @@
 		CONFIG	MCLRE=ON        ;MASTER CLEAR HABILITADO
 		;CONFIG4L DIR 300006H	   	81
 		CONFIG	STVREN=ON	 	;SI EL STACK SE LLENA CAUSE RESET		
-		CONFIG	LVP=OFF		 	;PROGRAMACIÒN EN BAJO VOLTAJE APAGADO
+		CONFIG	LVP=OFF		 	;PROGRAMACIÃ’N EN BAJO VOLTAJE APAGADO
 		CONFIG	ICPRT=OFF	 	;REGISTRO ICPORT DESHABILITADO
 		CONFIG	XINST=OFF  		;SET DE EXTENCION DE INSTRUCCIONES Y DIRECCIONAMIENTO INDEXADO DESHABILITADO
 		;CONFIG5L DIR 300008H 		0F
-		CONFIG	CP0=OFF		 	;LOS BLOQUES DEL CÒDIGO DE PROGRAMA
+		CONFIG	CP0=OFF		 	;LOS BLOQUES DEL CÃ’DIGO DE PROGRAMA
 		CONFIG	CP1=OFF         ;NO ESTAN PROTEGIDOS
 		CONFIG	CP2=OFF		 
 		CONFIG	CP3=OFF
@@ -82,7 +81,7 @@
 		movlw 0x00
 		movwf TRISB
 ;//------------------------------------------------------
-; ahora viene la deshabilitación de modulos (pheriperals)
+; ahora viene la deshabilitaciÃ³n de modulos (pheriperals)
 ;*******************************************************
  		clrf ADCON0 			; desactiva el CAD
  		movlw 0xf 
@@ -118,22 +117,23 @@
 		
 	tabla
 		addwf PCL,f		;????
-		retlw 0x30		;1
+		retlw 0x3f		;1
+		retlw 0x06		;1
 		retlw 0x5b		;2
 		retlw 0x4f		;3
 		retlw 0x66		;4
 		retlw 0x6d		;5
 		retlw 0x7d		;6
 		retlw 0x07		;7
-		retlw 0xe7		;8
-		retlw 0x4f		;9
+		retlw 0x7f		;8
+		retlw 0x67		;9
 		retlw 0x77		;A
 		retlw 0x7c		;B
-		retlw 0x79		;C
+		retlw 0x39		;C
 		retlw 0x5e		;D
 		retlw 0x79		;E
-		retlw 0x75		;F
-		retlw 0x00		;nada
+		retlw 0x71		;F
+		
 
 	retardo_1
 		movlw d'1000'		    ;1 seg
