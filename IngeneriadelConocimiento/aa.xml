@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbd>
+	<basedatos>
+		<estudiantes>
+			<boleta tipodato="entero" llave="primaria"/>
+			<nombre tipodato="texto"/>
+			<industria tipodato="entero"/>
+			<grupo tipodato="texto"/>
+		</estudiantes>
+		<financieras>
+			<boleta tipodato="entero" llave="secundaria" referencia="estudiantes"/>
+			<infraestructura tipodato="entero"/>
+			<bancos tipodato="entero"/>
+			<insumos tipodato="decimal"/>
+			<en_proceso tipodato="entero"/>
+			<mercancias tipodato="entero"/>
+			<clientes tipodato="entero"/>
+			<proveedores tipodato="entero"/>
+			<prestamos tipodato="entero"/>
+			<social tipodato="entero"/>
+			<utilidades tipodato="decimal"/>
+		</financieras>
+
+	</basedatos>
+
+
+</xbd>
