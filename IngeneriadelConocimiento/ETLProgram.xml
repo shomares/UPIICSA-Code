@@ -23,12 +23,14 @@
                      </xsl:choose>
 					 ,
                   </xsl:for-each>
+				  PRIMARY KEY(
 				   <xsl:for-each select="child::*[@llave='primaria']">
-				      PRIMARY KEY(<xsl:value-of select="name(.)" />)
+				      <xsl:value-of select="name(.)" />
 					  <xsl:if test="following-sibling::*[@llave='primaria']">, </xsl:if>
 				   </xsl:for-each>
+				   )
 				    <xsl:for-each select="child::*[@llave='secundaria']">
-				      FOREGEIN KEY(<xsl:value-of select="name(.)" />)
+				      foreign  KEY(<xsl:value-of select="name(.)" />)
 					REFERENCES <xsl:value-of select="@referencia" />(<xsl:value-of select="name(.)" />) 	
 					  <xsl:if test="following-sibling::*[@llave='secundaria']">, </xsl:if>
 				   </xsl:for-each>
