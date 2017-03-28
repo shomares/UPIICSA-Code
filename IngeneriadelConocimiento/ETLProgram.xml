@@ -29,7 +29,7 @@
 				   </xsl:for-each>
 				    <xsl:for-each select="child::*[@llave='secundaria']">
 				      FOREGEIN KEY(<xsl:value-of select="name(.)" />)
-					REFERENCES(<xsl:value-of select="@referencia" />) 	
+					REFERENCES <xsl:value-of select="@referencia" />(<xsl:value-of select="name(.)" />) 	
 					  <xsl:if test="following-sibling::*[@llave='secundaria']">, </xsl:if>
 				   </xsl:for-each>
                   );
