@@ -1,0 +1,16 @@
+Tablespace
+CREATE usuarios
+	Roles y privilegios
+
+Crear tablas
+	Deadlook y Transaccioes
+Diferentes sesiones
+
+Database link
+ 
+Sinonimos
+
+Usuarios
+
+DBLINK Oracle
+
