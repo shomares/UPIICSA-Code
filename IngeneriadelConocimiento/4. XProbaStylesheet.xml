@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+		   <xsl:template match="//xproba">
+					<xsl:for-each select="child::*">
+						<xsl:variable name="idBosque" select="position()" />
+						INSERT INTO bosque values(<xsl:value-of select="$idBosque" />, "<xsl:value-of select="@nbbosque"/>");
+						<br/>
+						<xsl:for-each select="child::*">
+							<xsl:variable name="idArbol" select="position()" />
+							INSERT INTO arbol values (<xsl:value-of select="$idArbol"/>, 
+								<xsl:value-of select="$idBosque" />, "<xsl:value-of select="@nbarbol"/>", "<xsl:value-of select="@frecuencia"/>" );
+							<br/>
+							<xsl:apply-templates>
+								 <xsl:with-param name="parent_idBosque" select="$idBosque"/>
+								 <xsl:with-param name="parent_idArbol" select="$idArbol"/>
+								 <xsl:with-param name="parent_idAtributo" select="0"/>
+							</xsl:apply-templates>
+						</xsl:for-each>
+					</xsl:for-each>
+		   </xsl:template>
+		<xsl:template match="atributo">
+				<xsl:param name="parent_idBosque"/> <!-- idBosque-->
+				<xsl:param name="parent_idArbol"/> <!-- idArbol-->
+				<xsl:param name="parent_idAtributo"/><!-- idAtributo-->
+				Insert into atributo  values (
+						(SELECT idAtributo FROM (SELECT COUNT(*)+1 idAtributo FROM  atributo) AS
+						idAtributo),
+						<xsl:value-of select="$parent_idBosque"/>,	
+						<xsl:value-of select="$parent_idArbol"/>,
+						'<xsl:value-of select="@nbatributo"/>');
+												<br/>
+				<xsl:apply-templates>
+					 <xsl:with-param name="parent_idBosque" select="$parent_idBosque"/>
+					 <xsl:with-param name="parent_idArbol" select="$parent_idArbol"/>
+					 <xsl:with-param name="parent_idAtributo" select="@nbatributo"/>
+				</xsl:apply-templates>
+		</xsl:template>
+		<xsl:template match="valor">
+					<xsl:param name="parent_idBosque"/> <!-- idBosque-->
+					<xsl:param name="parent_idArbol"/> <!-- idArbol-->
+					<xsl:param name="parent_idAtributo"/> <!-- idAtributo-->
+					Insert into valor  values (
+					(SELECT idValor FROM (SELECT COUNT(*)+1 idValor FROM  valor) AS
+						idValor),
+					<xsl:value-of select="$parent_idBosque"/>,
+					<xsl:value-of select="$parent_idArbol"/>,
+					(SELECT idatributo
+						from  (SELECT idatributo from atributo 
+						where nbatributo='<xsl:value-of select="$parent_idAtributo"/>') as tt),
+					'<xsl:value-of select="@nbvalor"/>',  
+					'<xsl:value-of select="@frecuencia"/>');<br/>
+				<xsl:apply-templates>
+					 <xsl:with-param name="parent_idBosque" select="$parent_idBosque"/>
+					 <xsl:with-param name="parent_idArbol" select="$parent_idArbol"/>
+					 <xsl:with-param name="parent_idAtributo" select="$parent_idAtributo"/>
+				</xsl:apply-templates>
+		</xsl:template>
+</xsl:stylesheet>

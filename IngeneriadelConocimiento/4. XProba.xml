@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xproba>
+	<bosque nbbosque="operaciones">
+		<arbol nbarbol="ventas" frecuencia="100">
+			<atributo nbatributo="tienda">
+				<valor nbvalor="B" frecuencia="70">
+					<atributo nbatributo="producto">
+						<valor nbvalor="X" frecuencia="50"/>
+						<valor nbvalor="Y" frecuencia="20"/>
+					</atributo>
+				</valor>
+				<valor nbvalor="A" frecuencia="30">
+					<atributo nbatributo="producto">
+							<valor nbvalor="X" frecuencia="20"/>
+							<valor nbvalor="Z" frecuencia="10"/>
+					</atributo>
+				</valor>
+			</atributo>
+		</arbol>
+	</bosque>
+</xproba>

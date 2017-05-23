@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	
+	 <xsl:template match="//xloco">
+		<xsl:for-each select="child::*">
+			<xsl:variable name="idusuario" select="position()" />
+			INSERT INTO usuario values(<xsl:value-of select="$idusuario"/>, '<xsl:value-of select="@nbusuario"/>');
+			<xsl:for-each select="child::*">
+				<xsl:variable name="idontologia" select="position()" />
+				INSERT INTO ontologia values(<xsl:value-of select="$idusuario"/>, <xsl:value-of select="$idontologia"/>, '<xsl:value-of select="@nbontologia"/>');
+				<xsl:for-each select="child::*">
+					<xsl:variable name="idideal" select="position()" />
+					INSERT INTO ideal values(<xsl:value-of select="$idusuario"/>, <xsl:value-of select="$idontologia"/>, <xsl:value-of select="$idideal"/>, '<xsl:value-of select="@nbideal"/>');
+					<xsl:apply-templates>
+						<xsl:with-param name="parent_usuario" select="$idusuario"/>
+						<xsl:with-param name="parent_ontologia" select="$idontologia"/>
+						<xsl:with-param name="parent_ideal" select="$idideal"/>
+					</xsl:apply-templates>
+				</xsl:for-each>
+			</xsl:for-each>
+		</xsl:for-each>
+		
+			
+	</xsl:template>
+	
+	
+	<xsl:template match="//metodos">
+		<xsl:param name="parent_ontologia"/> <!-- metodo-->
+		<xsl:param name="parent_ideal"/> <!-- metodo-->
+		<xsl:param name="parent_usuario"/> <!-- metodo-->
+		<xsl:apply-templates>
+						<xsl:with-param name="parent_usuario" select="$parent_usuario"/>
+						<xsl:with-param name="parent_ontologia" select="$parent_ontologia"/>
+						<xsl:with-param name="parent_ideal" select="$parent_ideal"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	<xsl:template match="metodo">
+		<xsl:param name="parent_verdadero"/> <!-- metodo-->
+		<xsl:param name="parent_nameMetodo"/> <!-- metodo-->
+		<xsl:param name="parent_ontologia"/> <!-- metodo-->
+		<xsl:param name="parent_ideal"/> <!-- metodo-->
+		<xsl:param name="parent_usuario"/> <!-- metodo-->
+		INSERT INTO metodos values(
+				<xsl:value-of select="$parent_usuario"/>, <!--ID usuario-->
+				<xsl:value-of select="$parent_ontologia"/>, <!--ID odontologia-->
+				<xsl:value-of select="$parent_ideal"/>, <!--ID ideal-->
+				(SELECT idMetodo FROM (SELECT COUNT(*)+1 idMetodo FROM  metodos) AS
+						metodos), <!--id Metodo-->
+				'<xsl:value-of select="@nbmetodo"/>');
+				<br/>
+				
+		<xls:if test="$parent_verdadero='true' and $parent_nameMetodo!=''">
+			UPDATE metodos set verdadero=(SELECT idMetodo FROM (SELECT COUNT(*) idMetodo FROM  metodos) AS
+						metodos)
+						where nbmetodo = '<xsl:value-of select="$parent_nameMetodo"/>'
+		</xls:if>
+		<br/>
+				
+				
+		<xsl:apply-templates select="asignacion">
+			<xsl:with-param name="parent_nameMetodo" select="@nbmetodo"/>
+						<xsl:with-param name="parent_usuario" select="$parent_usuario"/>
+						<xsl:with-param name="parent_ontologia" select="$parent_ontologia"/>
+						<xsl:with-param name="parent_ideal" select="$parent_ideal"/>
+			</xsl:apply-templates>	
+		<xsl:apply-templates select="decision">
+			<xsl:with-param name="parent_nameMetodo" select="@nbmetodo"/>
+						<xsl:with-param name="parent_usuario" select="$parent_usuario"/>
+						<xsl:with-param name="parent_ontologia" select="$parent_ontologia"/>
+						<xsl:with-param name="parent_ideal" select="$parent_ideal"/>
+			</xsl:apply-templates>	
+		
+	</xsl:template>
+	<xsl:template match="asignacion">
+		<xsl:param name="parent_nameMetodo"/> <!-- metodo-->
+		<xsl:param name="parent_ontologia"/> <!-- metodo-->
+		<xsl:param name="parent_ideal"/> <!-- metodo-->
+		<xsl:param name="parent_usuario"/> <!-- metodo-->
+
+		INSERT INTO asignaciones values(
+				<xsl:value-of select="$parent_usuario"/>, <!--ID usuario-->
+				<xsl:value-of select="$parent_ontologia"/>, <!--ID odontologia-->
+				<xsl:value-of select="$parent_ideal"/>, <!--ID ideal-->
+		(SELECT idMetodo
+		from  (SELECT idMetodo from metodos 
+		where nbmetodo='<xsl:value-of select="$parent_nameMetodo"/>') as tt),
+		<!--ID metodo-->
+		1, <!--ID instruccion-->
+		'<xsl:value-of select="variable"/>',<!--Atributo-->
+		'<xsl:value-of select="operando"/>'<!--Operando-->
+		);<br/>
+	</xsl:template>
+	<xsl:template match="decision">
+		<xsl:param name="parent_nameMetodo"/> <!-- metodo-->
+		<xsl:param name="parent_ontologia"/> <!-- metodo-->
+		<xsl:param name="parent_ideal"/> <!-- metodo-->
+		<xsl:param name="parent_usuario"/> <!-- metodo-->
+
+		INSERT INTO decisiones (values
+				<xsl:value-of select="$parent_usuario"/>, <!--ID usuario-->
+				<xsl:value-of select="$parent_ontologia"/>, <!--ID odontologia-->
+				<xsl:value-of select="$parent_ideal"/>, <!--ID ideal-->
+		(SELECT idMetodo
+		from  (SELECT idMetodo from metodos 
+		where nbmetodo='<xsl:value-of select="$parent_nameMetodo"/>') as tt),
+		<!--ID metodo-->
+		1, <!--ID instruccion-->
+		'<xsl:value-of select="condicion"/>',<!-- Condicion-->
+		NULL<!-- Id metodo Verdadero-->
+		NULL,<!-- Id metodo Falso-->
+		);<br/>
+		<xsl:if test="verdadero">
+			<xsl:apply-templates>
+				<xsl:with-param name="parent_verdadero" select="true"/>
+				<xsl:with-param name="parent_nameMetodo" select="$parent_nameMetodo"/>
+						<xsl:with-param name="parent_usuario" select="$parent_usuario"/>
+						<xsl:with-param name="parent_ontologia" select="$parent_ontologia"/>
+						<xsl:with-param name="parent_ideal" select="$parent_ideal"/>
+			</xsl:apply-templates>
+		</xsl:if>
+		<br/>
+	</xsl:template>
+</xsl:stylesheet>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbd>
+	<ontos>
+		<bosque>
+			<idbosque tipodato="entero" llave="primaria"/>
+			<nbbosque tipodato="texto"/>
+		</bosque>
+		<arbol>
+			<idarbol tipodato="entero" llave="primaria"/>
+			<idbosque tipodato="entero" />
+			<nbarbol tipodato="texto"/>
+			<frecuencia tipodato="entero"/>
+		</arbol>
+		<atributo>
+			<idatributo tipodato="entero" llave="primaria" />
+			<idbosque tipodato="entero"/>
+			<idarbol tipodato="entero"/>
+			<nbatributo tipodato="texto"/>
+		</atributo>
+		<valor>
+			<idvalor tipodato="entero" llave="primaria"/>
+			<idbosque tipodato="entero"/>
+			<idarbol tipodato="entero"/>
+			<idatributo tipodato="entero"/>
+			<nbvalor tipodato="texto"/>
+			<frecuencia tipodato="entero"/>
+		</valor>
+	</ontos>
+</xbd>
