@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xlf>
+<lenguaje nblenguaje="javascript">
+	<sintactica nbsintactica="decision">
+		<lexico tipolexico="fijo" contenido="if ("/>
+		<lexico tipolexico="variable" contenido="condicion"/>
+		<lexico tipolexico="fijo" contenido=") {"/>
+		<lexico tipolexico="variable" contenido="programa"/>
+		<lexico tipolexico="fijo" contenido="}"/>
+	</sintactica>
+	<sintactica nbsintactica="metodos">
+		<lexico tipolexico="fijo" contenido="function"/>
+		<lexico tipolexico="variable" contenido="nbmetodo"/>
+		<lexico tipolexico="fijo" contenido="(){"/>
+		<lexico tipolexico="variable" contenido="programa"/>
+		<lexico tipolexico="fijo" contenido="}"/>		
+	</sintactica>
+	<sintactica nbsintactica="asignacion">
+		<lexico tipolexico="variable" contenido="operando"/>
+		<lexico tipolexico="fijo" contenido="="/>
+		<lexico tipolexico="variable" contenido="operando"/>
+		<lexico tipolexico="fijo" contenido=";"/>
+	</sintactica>
+</lenguaje>
+</xlf>
